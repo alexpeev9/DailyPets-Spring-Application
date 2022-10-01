@@ -1,4 +1,4 @@
-package com.example.dailypetsspringapplication.config;
+package com.example.dailypetsspringapplication.configs;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

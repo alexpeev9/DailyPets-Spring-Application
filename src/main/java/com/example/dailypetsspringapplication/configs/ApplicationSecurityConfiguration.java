@@ -1,4 +1,4 @@
-package com.example.dailypetsspringapplication.config;
+package com.example.dailypetsspringapplication.configs;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
