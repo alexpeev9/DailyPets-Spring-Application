@@ -1,4 +1,4 @@
-package com.example.dailypetsspringapplication.controllers;
+package com.example.dailypetsspringapplication.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
