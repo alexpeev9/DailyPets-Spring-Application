@@ -1,11 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DailyPets</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<!-- Head -->
+<head th:replace="fragments/commons::head"></head>
 <body>
-<h1>DailyPets Spring Application</h1>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+    <div class="content">
+        <!-- Navigation -->
+        <nav th:replace="fragments/commons::navigation"></nav>
+        <!-- Main -->
+        <main class="pets-view">
+            <div class="gallery">
+                <figure class="gallery__item">
+                    <img src="images/pet-1.jpg" alt="Photo of pet 1" class="gallery__photo">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/pet-2.jpg" alt="Photo of pet 2" class="gallery__photo">
+                </figure>
+                <figure class="gallery__item">
+                    <img src="images/pet-3.jpg" alt="Photo of pet 3" class="gallery__photo">
+                </figure>
+            </div>
+            <div class="title">
+                <h1 class="title__heading">
+                    Daily Dose of Pets
+                </h1>
+            </div>
+            <div class="detail">
+                <img src="images/cat-1.jpg" alt="Pet 1" class="pet__photo">
+                <div class="description">
+                    <h1>Cool Cat Bob</h1>
+                    <p class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nisi dignissimos debitis ratione
+                        sapiente saepe. Accusantium cumque, quas, ut corporis incidunt deserunt quae architecto
+                        voluptate.
+                    </p>
+                    <a href="#" class="edit-btn">Update</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
 </body>
 </html>
