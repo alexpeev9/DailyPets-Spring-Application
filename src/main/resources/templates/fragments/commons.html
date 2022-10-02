@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <link rel="icon" href="images/favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DailyPets Spring Application</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+
+<header class="header" th:fragment="header">
+    <img src="images/logo.png" alt="logo" class="logo">
+
+    <form action="#" class="search">
+        <input type="text" class="search__input" placeholder="Search hotels">
+        <button class="search__button">
+            <svg class="search__icon">
+                <use xlink:href="images/sprite.svg#lnr-magnifier"></use>
+            </svg>
+        </button>
+    </form>
+</header>
+
+<nav class="sidebar" th:fragment="navigation">
+    <ul class="side-nav">
+        <li class="side-nav__item side-nav__item--active">
+            <a href="/" class="side-nav__link">
+                <svg class="side-nav__icon">
+                <use xlink:href="images/sprite.svg#lnr-home"></use>
+                </svg>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="side-nav__item">
+            <a href="pets/create" class="side-nav__link">
+                <svg class="side-nav__icon">
+                    <use xlink:href="images/sprite.svg#lnr-rocket"></use>
+                </svg>
+                <span>Join</span>
+            </a>
+        </li>
+        <li class="side-nav__item">
+            <a href="pets/create" class="side-nav__link">
+                <svg class="side-nav__icon">
+                    <use xlink:href="images/sprite.svg#lnr-plus-circle"></use>
+                </svg>
+                <span>Add Pet</span>
+            </a>
+        </li>
+        <li class="side-nav__item">
+            <a href="pets/create" class="side-nav__link">
+                <svg class="side-nav__icon">
+                    <use xlink:href="images/sprite.svg#lnr-user"></use>
+                </svg>
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="legal">
+        &copy; Aleksandar Peev 2022
+    </div>
+</nav>
+</body>
+</html>
