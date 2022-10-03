@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="icon" href="images/favicon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css"></link>
+    <link rel="stylesheet" href="/css/login.css"></link>
+</head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header">
+    </header>
+    <div class="content">
+        <!-- Navigation -->
+        <nav th:replace="fragments/commons::navigation"></nav>
+        <!-- Main -->
+        <main class="pets-view">
+            <div class="gallery">
+                <figure>
+                    <img src="images/pet-1.jpg" alt="Photo of pet 1" class="gallery__photo">
+                </figure>
+                <figure>
+                    <img src="images/pet-2.jpg" alt="Photo of pet 2" class="gallery__photo">
+                </figure>
+                <figure>
+                    <img src="images/pet-3.jpg" alt="Photo of pet 3" class="gallery__photo">
+                </figure>
+            </div>
+            <div class="title">
+                <h1 class="title__heading">
+                    Login
+                </h1>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>
