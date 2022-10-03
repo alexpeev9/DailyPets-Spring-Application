@@ -3,13 +3,13 @@
 <body>
 
 <header class="header" th:fragment="header">
-    <img src="images/logo.png" alt="logo" class="logo">
+    <img src="/images/logo.png" alt="logo" class="logo">
 
     <form action="#" class="search">
         <input type="text" class="search__input" placeholder="Search pets">
         <button class="search__button">
             <svg class="search__icon">
-                <use xlink:href="images/sprite.svg#lnr-magnifier"></use>
+                <use xlink:href="/images/sprite.svg#lnr-magnifier"></use>
             </svg>
         </button>
     </form>
@@ -20,31 +20,31 @@
         <li class="side-nav__item side-nav__item--active">
             <a href="/" class="side-nav__link">
                 <svg class="side-nav__icon">
-                <use xlink:href="images/sprite.svg#lnr-home"></use>
+                <use xlink:href="/images/sprite.svg#lnr-home"></use>
                 </svg>
                 <span>Home</span>
             </a>
         </li>
         <li class="side-nav__item">
-            <a href="pets/create" class="side-nav__link">
+            <a href="/login" class="side-nav__link">
                 <svg class="side-nav__icon">
-                    <use xlink:href="images/sprite.svg#lnr-rocket"></use>
+                    <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
                 </svg>
                 <span>Join</span>
             </a>
         </li>
         <li class="side-nav__item">
-            <a href="pets/add" class="side-nav__link">
+            <a href="/pets/add" class="side-nav__link">
                 <svg class="side-nav__icon">
-                    <use xlink:href="images/sprite.svg#lnr-plus-circle"></use>
+                    <use xlink:href="/images/sprite.svg#lnr-plus-circle"></use>
                 </svg>
                 <span>Add Pet</span>
             </a>
         </li>
         <li class="side-nav__item">
-            <a href="pets/create" class="side-nav__link">
+            <a href="/logout" class="side-nav__link">
                 <svg class="side-nav__icon">
-                    <use xlink:href="images/sprite.svg#lnr-user"></use>
+                    <use xlink:href="/images/sprite.svg#lnr-user"></use>
                 </svg>
                 <span>Logout</span>
             </a>
