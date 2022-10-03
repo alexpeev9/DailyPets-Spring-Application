@@ -37,4 +37,3 @@ build/
 mvnw
 mvnw.cmd
 .mvn/wrapper/maven-wrapper.properties
-src/main/resources/application.yml
