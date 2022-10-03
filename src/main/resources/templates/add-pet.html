@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="icon" href="/images/favicon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>Add Pet</title>
+    <link rel="stylesheet" href="/css/style.css"></link>
+</head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header">
+    </header>
+    <div class="content">
+        <!-- Navigation -->
+        <nav th:replace="fragments/commons::navigation"></nav>
+        <!-- Main -->
+        <main class="pets-view">
+            <div class="title">
+                <h1 class="title__heading">
+                    Add Pet
+                </h1>
+            </div>
+            <form
+                    th:action="@{/pets/add}"
+                    th:method="POST"
+                    th:object="${petBM}"
+                    enctype="multipart/form-data">
+                <label for="inputName">Name</label>
+                <input th:field="*{name}"
+                       required minlength="1" maxlength="20" type="text" id="inputName"
+                       aria-describedby="inputNameError">
+                <small th:errors="*{name}" id="inputNameError">Name length must be more than 3 characters</small>
+                <label for="inputDescription">Description</label>
+                <textarea th:field="*{description}"
+                          required minlength="1" id="inputDescription"
+                          aria-describedby="inputDescriptionError"></textarea>
+                <small th:errors="*{description}" id="inputDescriptionError">Description length must be more than 5
+                    characters</small>
+                <label for="inputPicture">Picture</label>
+                <input th:field="*{picture}"
+                       required type="text" id="inputPicture" aria-describedby="inputPictureError">
+                <small th:errors="*{picture}" id="inputPictureError">Picture is required!</small>
+                <div>
+                    <img id="imagePreview" style="width: 200px; height: 200px; visibility: hidden" />
+                </div>
+                <label for="type">Type:</label>
+                <select th:field="*{type}" id="type" required>
+                    <option value="" selected>Select type</option>
+                    <option th:each="t : ${T(com.example.dailypetsspringapplication.model.entity.enums.PetTypeEnum).values()}"
+                            th:value="${t}" th:text="${t}"></option>
+                </select>
+                <button type="submit">Add Pet</button>
+            </form>
+        </main>
+    </div>
+</div>
+<script th:src="@{/js/create-pet-image.js}"></script>
+</body>
+</html>
