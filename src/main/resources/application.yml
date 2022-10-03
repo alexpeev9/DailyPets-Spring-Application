@@ -3,13 +3,14 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
 
     # DEVELOPMENT
-    # url: "jdbc:mysql://localhost:3306/dailypets?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    # url: "jdbc:mysql://localhost:3306/dailypets2?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     # username: root
 
     # PRODUCTION
-    url: "jdbc:mysql://sql.freedb.tech:3306/freedb_dailypets"
+    url: jdbc:${CLEARDB_DATABASE_URL}
     username: ${DAILYPETS_DB_USERNAME}
-    password: ${DAILYPETS_DB_PASSWORD}
+    password: ${DAILYPETS_DB_USERNAME}
+
   servlet:
     multipart:
       max-file-size: 1MB
