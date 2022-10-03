@@ -3,6 +3,7 @@ package com.example.dailypetsspringapplication.model.binding;
 import com.example.dailypetsspringapplication.model.entity.enums.PetTypeEnum;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class PetBM {
@@ -14,7 +15,7 @@ public class PetBM {
     public PetBM() {
     }
 
-    @Size(min = 3, max = 20, message = "Pet name must be between 3 and 20 characters.")
+    @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters!")
     public String getName() {
         return name;
     }
@@ -23,7 +24,7 @@ public class PetBM {
         this.name = name;
     }
 
-    @Size(min = 3) // TODO: temporary for tests
+    @Size(min = 3, max=100, message = "Description must be between 3 and 100 characters!") // TODO: temporary for tests
     public String getDescription() {
         return description;
     }
@@ -32,7 +33,7 @@ public class PetBM {
         this.description = description;
     }
 
-    @NotNull
+    @NotNull(message = "You should select a type!")
     public PetTypeEnum getType() {
         return type;
     }
@@ -41,6 +42,8 @@ public class PetBM {
         this.type = type;
     }
 
+    @NotNull(message = "You should provide an url!")
+    @Pattern(regexp="^https:\\/\\/[^\\s]+", message="Url must start with https://")
     public String getPicture() {
         return picture;
     }
