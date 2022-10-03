@@ -25,16 +25,22 @@
             </div>
             <th:block th:if="${pets}">
                 <div th:each="p : ${pets}" th:object="${p}" class="detail">
-                    <img th:src="*{picture}" alt="Pet Image" class="pet__photo">
+                    <img th:src="*{picture}" alt="*{name} Pet" class="pet__photo">
                     <div class="description">
                         <h3 th:text="*{name}"></h3>
                         <p th:text="*{description}" class="paragraph"></p>
-                        <!-- <a th:href="@{/edit/{id}(id = *{id})}" class="edit-btn">Update</a> -->
+                        <a th:href="@{/pets/edit/{id}(id = *{id})}" class="edit-btn">Update</a>
                     </div>
                 </div>
             </th:block>
             <th:block th:unless="${pets}">
-                <h3 class="title__heading">Sorry! There are no pets.</h3>
+                <div class="detail">
+                    <img src="images/cat-1.jpg" alt="Pet Error Image" class="pet__photo">
+                    <div class="description">
+                        <h3>An Error Occurred!</h3>
+                        <p class="paragraph">There are no pets. Please try again later.</p>
+                    </div>
+                </div>
             </th:block>
         </main>
     </div>
