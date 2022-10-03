@@ -40,7 +40,7 @@ public class Pet  extends BaseEntity {
         this.type = type;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     public User getUser() {
         return user;
     }

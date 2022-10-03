@@ -30,4 +30,21 @@ public class PetServiceImpl implements PetService {
         Pet pet = modelMapper.map(petBM, Pet.class);
         petRepository.save(pet);
     }
+
+    public PetBM findPet(Long id){
+        return petRepository.findById(id).map(p -> modelMapper.map(p, PetBM.class)).orElse(null);
+    }
+
+    public void updatePet(PetBM petBM) {
+        Pet pet = petRepository.findById(petBM.getId()).orElse(null);
+        pet.setName(petBM.getName());
+        pet.setDescription(petBM.getDescription());
+        pet.setPicture(petBM.getPicture());
+        pet.setType(petBM.getType());
+        petRepository.save(pet);
+    }
+
+    public void deletePet(Long id){
+        petRepository.deleteById(id);
+    }
 }

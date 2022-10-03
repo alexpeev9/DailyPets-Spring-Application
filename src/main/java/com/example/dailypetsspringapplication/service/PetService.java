@@ -8,4 +8,7 @@ import java.util.List;
 public interface PetService {
     List<PetVM> findAllPetsView();
     void addPet(PetBM petBM);
+    PetBM findPet(Long id);
+    void updatePet(PetBM petBM);
+    void deletePet(Long id);
 }

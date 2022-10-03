@@ -7,6 +7,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class PetBM {
+    private Long id;
     private String name;
     private String description;
     private PetTypeEnum type;
@@ -51,4 +52,8 @@ public class PetBM {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 }

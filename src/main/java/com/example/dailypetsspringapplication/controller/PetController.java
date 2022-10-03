@@ -3,11 +3,9 @@ package com.example.dailypetsspringapplication.controller;
 import com.example.dailypetsspringapplication.model.binding.PetBM;
 import com.example.dailypetsspringapplication.service.PetService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -44,4 +42,30 @@ public class PetController {
         petService.addPet(petBM);
         return "redirect:/";
     }
+
+    @GetMapping("/update/{id}")
+    public String updateGET(@PathVariable Long id, Model model) {
+        model.addAttribute("pet", petService.findPet(id));
+        return "update-pet";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updatePOST(@Valid PetBM petBM, BindingResult bindingResult, Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("pet", petBM);
+            model.addAttribute("org.springframework.validation.BindingResult.pet", bindingResult);
+
+            return "update-pet";
+        }
+
+        petService.updatePet(petBM);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteGET(@PathVariable Long id){
+        petService.deletePet(id);
+        return "redirect:/";
+    }
+
 }
