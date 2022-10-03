@@ -1,26 +1,23 @@
+<!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<!-- Head -->
-<head th:replace="fragments/commons::head"></head>
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="icon" href="images/favicon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>DailyPets Spring Application</title>
+    <link rel="stylesheet" href="/css/style.css"></link>
+    <link rel="stylesheet" href="/css/index.css"></link>
+</head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="fragments/commons::header">
+    </header>
     <div class="content">
         <!-- Navigation -->
         <nav th:replace="fragments/commons::navigation"></nav>
         <!-- Main -->
         <main class="pets-view">
-            <div class="gallery">
-                <figure class="gallery__item">
-                    <img src="images/pet-1.jpg" alt="Photo of pet 1" class="gallery__photo">
-                </figure>
-                <figure class="gallery__item">
-                    <img src="images/pet-2.jpg" alt="Photo of pet 2" class="gallery__photo">
-                </figure>
-                <figure class="gallery__item">
-                    <img src="images/pet-3.jpg" alt="Photo of pet 3" class="gallery__photo">
-                </figure>
-            </div>
             <div class="title">
                 <h1 class="title__heading">
                     Daily Dose of Pets

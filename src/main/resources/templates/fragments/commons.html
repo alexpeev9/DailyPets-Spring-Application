@@ -1,20 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Head -->
-<head th:fragment="head">
-    <meta charset="UTF-8"/>
-    <link rel="icon" href="images/favicon.ico"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>DailyPets Spring Application</title>
-    <link rel="stylesheet" href="/css/style.css"/>
-</head>
 <body>
 
 <header class="header" th:fragment="header">
     <img src="images/logo.png" alt="logo" class="logo">
 
     <form action="#" class="search">
-        <input type="text" class="search__input" placeholder="Search hotels">
+        <input type="text" class="search__input" placeholder="Search pets">
         <button class="search__button">
             <svg class="search__icon">
                 <use xlink:href="images/sprite.svg#lnr-magnifier"></use>
