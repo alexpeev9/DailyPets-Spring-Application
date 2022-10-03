@@ -23,18 +23,19 @@
                     Daily Dose of Pets
                 </h1>
             </div>
-            <div class="detail">
-                <img src="images/cat-1.jpg" alt="Pet 1" class="pet__photo">
-                <div class="description">
-                    <h1>Cool Cat Bob</h1>
-                    <p class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nisi dignissimos debitis ratione
-                        sapiente saepe. Accusantium cumque, quas, ut corporis incidunt deserunt quae architecto
-                        voluptate.
-                    </p>
-                    <a href="#" class="edit-btn">Update</a>
+            <th:block th:if="${pets}">
+                <div th:each="p : ${pets}" th:object="${p}" class="detail">
+                    <img th:src="*{picture}" alt="Pet Image" class="pet__photo">
+                    <div class="description">
+                        <h3 th:text="*{name}"></h3>
+                        <p th:text="*{description}" class="paragraph"></p>
+                        <!-- <a th:href="@{/edit/{id}(id = *{id})}" class="edit-btn">Update</a> -->
+                    </div>
                 </div>
-            </div>
+            </th:block>
+            <th:block th:unless="${pets}">
+                <h3 class="title__heading">Sorry! There are no pets.</h3>
+            </th:block>
         </main>
     </div>
 </div>
