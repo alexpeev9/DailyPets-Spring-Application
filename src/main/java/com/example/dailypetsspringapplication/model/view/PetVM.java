@@ -1,5 +1,7 @@
 package com.example.dailypetsspringapplication.model.view;
 
+import com.example.dailypetsspringapplication.model.entity.enums.PetTypeEnum;
+
 public class PetVM {
     private Long id;
     private String name;

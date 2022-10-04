@@ -1,19 +1,22 @@
-package com.example.dailypetsspringapplication.model.entity;
+package com.example.dailypetsspringapplication.model.binding;
 
 import com.example.dailypetsspringapplication.model.entity.enums.PetTypeEnum;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "pets")
-public class Pet  extends BaseEntity {
+public class PetBM {
+    private Long id;
     private String name;
     private String description;
     private PetTypeEnum type;
-    private User user;
     private String picture;
 
-    @Column(unique = true, nullable = false)
+    public PetBM() {
+    }
+
+    @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters!")
     public String getName() {
         return name;
     }
@@ -22,7 +25,7 @@ public class Pet  extends BaseEntity {
         this.name = name;
     }
 
-    @Lob
+    @Size(min = 3, max=100, message = "Description must be between 3 and 100 characters!") // TODO: temporary for tests
     public String getDescription() {
         return description;
     }
@@ -31,7 +34,7 @@ public class Pet  extends BaseEntity {
         this.description = description;
     }
 
-    @Enumerated(EnumType.STRING)
+    @NotNull(message = "You should select a type!")
     public PetTypeEnum getType() {
         return type;
     }
@@ -40,16 +43,8 @@ public class Pet  extends BaseEntity {
         this.type = type;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @NotNull(message = "You should provide an url!")
+    @Pattern(regexp="^https:\\/\\/[^\\s]+", message="Url must start with https://")
     public String getPicture() {
         return picture;
     }
@@ -57,4 +52,8 @@ public class Pet  extends BaseEntity {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 }

@@ -34,7 +34,7 @@ public class User extends BaseEntity {
     }
 
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     public Set<Pet> getPets() {
         return pets;
     }

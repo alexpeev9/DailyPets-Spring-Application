@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"></meta>
-    <link rel="icon" href="images/favicon.ico"></link>
+    <link rel="icon" href="/images/favicon.ico"></link>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <title>DailyPets Spring Application</title>
     <link rel="stylesheet" href="/css/style.css"></link>
@@ -29,7 +29,7 @@
                     <div class="description">
                         <h3 th:text="*{name}"></h3>
                         <p th:text="*{description}" class="paragraph"></p>
-                        <a th:href="@{/pets/edit/{id}(id = *{id})}" class="edit-btn">Update</a>
+                        <a th:href="@{/pets/update/{id}(id = *{id})}" class="edit-btn">Update</a>
                     </div>
                 </div>
             </th:block>

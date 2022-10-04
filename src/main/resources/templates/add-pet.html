@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="icon" href="/images/favicon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>Add Pet</title>
+    <link rel="stylesheet" href="/css/style.css"></link>
+    <link rel="stylesheet" href="/css/add-pet.css"></link>
+</head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header">
+    </header>
+    <div class="content">
+        <!-- Navigation -->
+        <nav th:replace="fragments/commons::navigation"></nav>
+        <!-- Main -->
+        <main class="pets-view">
+            <div class="title">
+                <h1 class="title__heading">
+                    Add Pet
+                </h1>
+            </div>
+            <form class="pet-form"
+                  th:action="@{/pets/add}"
+                  th:method="POST"
+                  th:object="${petBM}"
+                  enctype="multipart/form-data">
+                <div class="pet-form__upper">
+                    <div class="pet-form__left">
+                        <div class="pet-form__input">
+                            <label for="inputName">Name</label>
+                            <input th:field="*{name}"
+                                   type="text"
+                                   id="inputName"
+                                   aria-describedby="inputNameError">
+                            <small th:errors="*{name}"></small>
+                        </div>
+                        <div class="pet-form__input">
+                            <label for="inputDescription">Description</label>
+                            <textarea th:field="*{description}"
+                                      id="inputDescription"
+                                      aria-describedby="inputDescriptionError"
+                                      minlength="1"
+                                      rows="8"></textarea>
+                            <small th:errors="*{description}" id="inputDescriptionError"></small>
+                        </div>
+                    </div>
+                    <div class="pet-form__right">
+                        <div class="pet-form__input">
+                            <label for="inputPicture">Picture Url</label>
+                            <input th:field="*{picture}"
+                                   type="text"
+                                   id="inputPicture"
+                                   aria-describedby="inputPictureError">
+                            <small th:errors="*{picture}" id="inputPictureError"></small>
+                        </div>
+                        <img id="imagePreview"
+                             src="/images/cat-1.jpg"
+                             class="pet-form__image"/>
+                    </div>
+                </div>
+                <div class="pet-form__buttons">
+                    <div class="pet-form__input">
+                        <label for="type">Type</label>
+                        <select class="pet-form__select" th:field="*{type}" id="type" aria-describedby="inputTypeError">
+                            <option value="" selected>Select type</option>
+                            <option th:each="t : ${T(com.example.dailypetsspringapplication.model.entity.enums.PetTypeEnum).values()}"
+                                    th:value="${t}" th:text="${t}"></option>
+                        </select>
+                        <small th:errors="*{type}" id="inputTypeError"></small>
+                    </div>
+                    <button class="pet-form__submit" type="submit">Add Pet</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<script th:src="@{/js/create-pet-image.js}"></script>
+</body>
+</html>
