@@ -1,6 +1,8 @@
 package com.example.dailypetsspringapplication.model.entity;
 
 import com.example.dailypetsspringapplication.model.entity.enums.PetTypeEnum;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -40,7 +42,8 @@ public class Pet  extends BaseEntity {
         this.type = type;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public User getUser() {
         return user;
     }
