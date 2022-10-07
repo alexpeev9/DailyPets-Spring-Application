@@ -73,8 +73,8 @@
                     </div>
 
                     <button class="pet-form__submit" type="submit">Update Pet</button>
-                    <a th:href="@{/pets/delete/{id}(id = *{id})}">
-                        <button class="pet-form__submit">Delete Pet</button>
+                    <a th:href="@{/pets/delete/{id}(id = *{id})}" class="pet-form__submit">
+                       Delete Pet
                     </a>
                 </div>
             </form>

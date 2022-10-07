@@ -79,6 +79,10 @@ input:focus, textarea:focus, select:focus, button:focus {
   padding: 1rem 0rem;
   margin: 0.3rem 0;
   font-size: 2rem;
+  border: 0.1rem solid var(--color-grey-dark-2);
+  text-align: center;
+  text-decoration: none;
+
 }
 
 @media only screen and (max-width: 37.5em) {
