@@ -20,35 +20,47 @@
         <li class="side-nav__item side-nav__item--active">
             <a href="/" class="side-nav__link">
                 <svg class="side-nav__icon">
-                <use xlink:href="/images/sprite.svg#lnr-home"></use>
+                    <use xlink:href="/images/sprite.svg#lnr-home"></use>
                 </svg>
                 <span>Home</span>
             </a>
         </li>
-        <li class="side-nav__item">
-            <a href="/login" class="side-nav__link">
-                <svg class="side-nav__icon">
-                    <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
-                </svg>
-                <span>Join</span>
-            </a>
-        </li>
-        <li class="side-nav__item">
-            <a href="/pets/add" class="side-nav__link">
-                <svg class="side-nav__icon">
-                    <use xlink:href="/images/sprite.svg#lnr-plus-circle"></use>
-                </svg>
-                <span>Add Pet</span>
-            </a>
-        </li>
-        <li class="side-nav__item">
-            <a href="/logout" class="side-nav__link">
-                <svg class="side-nav__icon">
-                    <use xlink:href="/images/sprite.svg#lnr-user"></use>
-                </svg>
-                <span>Logout</span>
-            </a>
-        </li>
+        <th:block th:if="${@currentUser.id == null}">
+            <li class="side-nav__item">
+                <a href="/users/register" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
+                    </svg>
+                    <span>Register</span>
+                </a>
+            </li>
+            <li class="side-nav__item">
+                <a href="/users/login" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-user"></use>
+                    </svg>
+                    <span>Login</span>
+                </a>
+            </li>
+        </th:block>
+        <th:block th:unless="${@currentUser.id == null}">
+            <li class="side-nav__item">
+                <a href="/pets/add" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-plus-circle"></use>
+                    </svg>
+                    <span>Add Pet</span>
+                </a>
+            </li>
+            <li class="side-nav__item">
+                <a href="/users/logout" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-user"></use>
+                    </svg>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </th:block>
     </ul>
 
     <div class="legal">
