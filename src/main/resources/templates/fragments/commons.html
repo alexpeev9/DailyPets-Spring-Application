@@ -4,9 +4,10 @@
 
 <header class="header" th:fragment="header">
     <img src="/images/logo.png" alt="logo" class="logo">
-
-    <form action="#" class="search">
-        <input type="text" class="search__input" placeholder="Search pets">
+    <form class="search"  th:action="@{/}"
+          th:method="POST"
+          enctype="multipart/form-data">
+        <input name="name" type="text" id="name" class="search__input" placeholder="Search pets">
         <button class="search__button">
             <svg class="search__icon">
                 <use xlink:href="/images/sprite.svg#lnr-magnifier"></use>
@@ -15,40 +16,62 @@
     </form>
 </header>
 
+<h2 th:fragment="error-message" class="title title__heading title__error"  th:if="${error}" th:text="${error}"></h2>
+
 <nav class="sidebar" th:fragment="navigation">
     <ul class="side-nav">
         <li class="side-nav__item side-nav__item--active">
             <a href="/" class="side-nav__link">
                 <svg class="side-nav__icon">
-                <use xlink:href="/images/sprite.svg#lnr-home"></use>
+                    <use xlink:href="/images/sprite.svg#lnr-home"></use>
                 </svg>
                 <span>Home</span>
             </a>
         </li>
-        <li class="side-nav__item">
-            <a href="/login" class="side-nav__link">
-                <svg class="side-nav__icon">
-                    <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
-                </svg>
-                <span>Join</span>
-            </a>
-        </li>
-        <li class="side-nav__item">
-            <a href="/pets/add" class="side-nav__link">
-                <svg class="side-nav__icon">
-                    <use xlink:href="/images/sprite.svg#lnr-plus-circle"></use>
-                </svg>
-                <span>Add Pet</span>
-            </a>
-        </li>
-        <li class="side-nav__item">
-            <a href="/logout" class="side-nav__link">
-                <svg class="side-nav__icon">
-                    <use xlink:href="/images/sprite.svg#lnr-user"></use>
-                </svg>
-                <span>Logout</span>
-            </a>
-        </li>
+        <th:block th:if="${@currentUser.id == null}">
+            <li class="side-nav__item">
+                <a href="/users/register" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
+                    </svg>
+                    <span>Register</span>
+                </a>
+            </li>
+            <li class="side-nav__item">
+                <a href="/users/login" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-user"></use>
+                    </svg>
+                    <span>Login</span>
+                </a>
+            </li>
+        </th:block>
+        <th:block th:unless="${@currentUser.id == null}">
+            <li class="side-nav__item">
+                <a href="/pets/add" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-plus-circle"></use>
+                    </svg>
+                    <span>Add Pet</span>
+                </a>
+            </li>
+            <li class="side-nav__item">
+                <a th:href="@{/users/profile/{username}(username = *{@currentUser.username})}" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
+                    </svg>
+                    <span>My Pets</span>
+                </a>
+            </li>
+            <li class="side-nav__item">
+                <a href="/users/logout" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-user"></use>
+                    </svg>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </th:block>
     </ul>
 
     <div class="legal">

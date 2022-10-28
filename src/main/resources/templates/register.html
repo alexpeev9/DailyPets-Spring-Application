@@ -5,28 +5,37 @@
     <meta charset="UTF-8"></meta>
     <link rel="icon" href="/images/favicon.ico"></link>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="/css/style.css"></link>
     <link rel="stylesheet" href="/css/add-pet.css"></link>
 </head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="fragments/commons::header">
+    </header>
     <div class="content">
         <!-- Navigation -->
         <nav th:replace="fragments/commons::navigation"></nav>
         <!-- Main -->
         <main class="pets-view">
-            <h1 class="title title__heading">Login</h1>
-            <!-- Error Message -->
-            <th:block th:replace="fragments/commons::error-message"></th:block>
+                <h1 class="title title__heading">Register</h1>
+                <!-- Error Message -->
+                <th:block th:replace="fragments/commons::error-message"></th:block>
             <form class="pet-form"
-                  th:action="@{/users/login}"
+                  th:action="@{/users/register}"
                   th:method="POST"
-                  th:object="${userLoginBM}"
+                  th:object="${userRegisterBM}"
                   enctype="multipart/form-data">
                 <div class="pet-form__upper">
                     <div class="pet-form__left">
+                        <div class="pet-form__input">
+                            <label for="inputUsername">Username</label>
+                            <input th:field="*{username}"
+                                   type="text"
+                                   id="inputUsername"
+                                   aria-describedby="inputUsernameError">
+                            <small th:errors="*{username}"></small>
+                        </div>
                         <div class="pet-form__input">
                             <label for="inputEmail">Email</label>
                             <input th:field="*{email}"
@@ -45,10 +54,18 @@
                                    aria-describedby="inputPasswordError">
                             <small th:errors="*{password}" id="inputPasswordError"></small>
                         </div>
+                        <div class="pet-form__input">
+                            <label for="inputConfirmPassword">Confirm Password</label>
+                            <input th:field="*{confirmPassword}"
+                                   type="password"
+                                   id="inputConfirmPassword"
+                                   aria-describedby="inputConfirmPasswordError">
+                            <small th:errors="*{confirmPassword}" id="inputConfirmPasswordError"></small>
+                        </div>
                     </div>
                 </div>
                 <div class="pet-form__buttons">
-                    <button class="pet-form__submit" type="submit">Login</button>
+                    <button class="pet-form__submit" type="submit">Register</button>
                 </div>
             </form>
         </main>

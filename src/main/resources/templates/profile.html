@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="icon" href="/images/favicon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>User Pets</title>
+    <link rel="stylesheet" href="/css/style.css"></link>
+    <link rel="stylesheet" href="/css/index.css"></link>
+</head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header">
+    </header>
+    <div class="content">
+        <!-- Navigation -->
+        <nav th:replace="fragments/commons::navigation"></nav>
+        <!-- Error Message -->
+        <th:block th:replace="fragments/commons::error-message"></th:block>
+        <!-- Main -->
+        <th:block th:unless="${error}">
+            <main class="pets-view" th:object="${user}">
+                <div class="title">
+                    <h1 class="title__heading">
+                        Pet collection of: <span th:text="*{username}"></span>
+                    </h1>
+                </div>
+                <th:block th:if="${pets}">
+                    <div th:each="p : ${pets}" th:object="${p}" class="detail">
+                        <img th:src="*{picture}" alt="*{name} Pet" class="pet__photo">
+                        <div class="description">
+                            <h3 th:text="*{name}"></h3>
+                            <p th:text="*{description}" class="paragraph"></p>
+                            <th:block th:if="${@currentUser.username != username}">
+                                <a th:href="@{/pets/update/{id}(id = *{id})}"
+                                   th:if="${@currentUser.username == username}" class="edit-btn">Update</a>
+                            </th:block>
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:unless="${pets}">
+                    <div class="detail">
+                        <img src="/images/cat-1.jpg" alt="Pet Error Image" class="pet__photo">
+                        <div class="description">
+                            <h3>There are no pets!</h3>
+                            <p class="paragraph">The user has no pets.</p>
+                        </div>
+                    </div>
+                </th:block>
+            </main>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

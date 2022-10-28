@@ -1,20 +1,14 @@
-package com.example.dailypetsspringapplication.model.entity;
+package com.example.dailypetsspringapplication.model.binding;
 
-import javax.persistence.*;
-import java.util.Set;
-
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+public class UserRegisterBM {
     private String username;
     private String email;
     private String password;
-    private Set<Pet> pets;
+    private String confirmPassword;
 
-    public User() {
+    public UserRegisterBM() {
     }
 
-    @Column(nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
@@ -23,7 +17,6 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    @Column(nullable = false, unique = true)
     public String getEmail() {
         return email;
     }
@@ -32,8 +25,6 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-
-    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
@@ -42,14 +33,11 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    public Set<Pet> getPets() {
-        return pets;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setPets(Set<Pet> pets) {
-        this.pets = pets;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
-
 }
