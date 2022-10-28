@@ -2,9 +2,11 @@ package com.example.dailypetsspringapplication.service.impl;
 
 import com.example.dailypetsspringapplication.model.binding.PetBM;
 import com.example.dailypetsspringapplication.model.entity.Pet;
+import com.example.dailypetsspringapplication.model.entity.User;
 import com.example.dailypetsspringapplication.model.view.PetVM;
 import com.example.dailypetsspringapplication.repository.PetRepository;
 import com.example.dailypetsspringapplication.service.PetService;
+import com.example.dailypetsspringapplication.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +27,32 @@ public class PetServiceImpl implements PetService {
     public List<PetVM> findAllPetsView() {
         return petRepository.findAll().stream().map(p -> modelMapper.map(p, PetVM.class)).collect(Collectors.toList());
     }
+    public List<PetVM> findSearchedPetsView(String name){
+        if(name.isEmpty()) throw new RuntimeException("Field cannot be empty!");
+        List<PetVM> pets = petRepository.searchByNameStartingWith(name).orElse(null).stream().map(p -> modelMapper.map(p, PetVM.class)).collect(Collectors.toList());
+        if(pets.stream().count() == 0) throw new RuntimeException("There are no pets!");
+        return pets;
+    };
 
-    public void addPet(PetBM petBM) {
+    @Override
+    public void addPet(PetBM petBM, User user) {
+        validatePetName(petBM.getName());
         Pet pet = modelMapper.map(petBM, Pet.class);
+        if (user == null) throw new RuntimeException("User is not logged!");
+        pet.setUser(user);
         petRepository.save(pet);
     }
 
-    public PetBM findPet(Long id){
+    @Override
+    public PetBM findPet(Long id) {
         return petRepository.findById(id).map(p -> modelMapper.map(p, PetBM.class)).orElse(null);
     }
 
-    public void updatePet(PetBM petBM) {
+    @Override
+    public void updatePet(PetBM petBM, User user) {
+        validatePetName(petBM.getName());
         Pet pet = petRepository.findById(petBM.getId()).orElse(null);
+        validatePet(pet, user);
         pet.setName(petBM.getName());
         pet.setDescription(petBM.getDescription());
         pet.setPicture(petBM.getPicture());
@@ -44,7 +60,21 @@ public class PetServiceImpl implements PetService {
         petRepository.save(pet);
     }
 
-    public void deletePet(Long id){
-        petRepository.deleteById(id);
+    @Override
+    public void deletePet(Long id, User user) {
+        Pet pet = petRepository.findById(id).orElse(null);
+        validatePet(pet, user);
+        petRepository.deleteById(pet.getId());
+    }
+
+    private void validatePet(Pet pet, User user) {
+        if (pet == null) throw new RuntimeException("Pet not found!");
+        if (user == null) throw new RuntimeException("User is not logged!");
+        if (pet.getUser().getId() != user.getId()) throw new RuntimeException("User must be the creator!");
+    }
+
+    private void validatePetName(String name) {
+        if (petRepository.findByName(name).orElse(null) != null)
+            throw new RuntimeException("Pet name is taken!");
     }
 }

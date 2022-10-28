@@ -18,18 +18,15 @@
         <nav th:replace="fragments/commons::navigation"></nav>
         <!-- Main -->
         <main class="pets-view">
-            <div class="title">
-                <h1 class="title__heading">
-                    Daily Dose of Pets
-                </h1>
-            </div>
+            <h1 class="title title__heading">Daily Dose of Pets</h1>
+            <!-- Error Message -->
+            <th:block th:replace="fragments/commons::error-message"></th:block>
             <th:block th:if="${pets}">
                 <div th:each="p : ${pets}" th:object="${p}" class="detail">
                     <img th:src="*{picture}" alt="*{name} Pet" class="pet__photo">
                     <div class="description">
                         <h3 th:text="*{name}"></h3>
                         <p th:text="*{description}" class="paragraph"></p>
-                        <a th:href="@{/pets/update/{id}(id = *{id})}" class="edit-btn">Update</a>
                     </div>
                 </div>
             </th:block>

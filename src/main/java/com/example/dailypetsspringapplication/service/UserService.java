@@ -3,10 +3,16 @@ package com.example.dailypetsspringapplication.service;
 import com.example.dailypetsspringapplication.model.binding.UserLoginBM;
 import com.example.dailypetsspringapplication.model.binding.UserRegisterBM;
 import com.example.dailypetsspringapplication.model.entity.User;
+import com.example.dailypetsspringapplication.model.view.PetVM;
 import com.example.dailypetsspringapplication.model.view.UserVM;
+
+import java.util.List;
 
 public interface UserService {
     UserVM findById(Long id);
+
+    UserVM findByUsername(String username);
+    UserVM findByEmail(String email);
 
     User findCurrentUser();
 
@@ -19,4 +25,6 @@ public interface UserService {
     boolean isLogged();
 
     boolean isNameExists(String username);
+
+    List<PetVM> findPetsOfUser(String username);
 }

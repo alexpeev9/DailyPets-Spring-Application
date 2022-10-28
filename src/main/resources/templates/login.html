@@ -11,18 +11,15 @@
 </head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header">
-    </header>
+    <header th:replace="fragments/commons::header"></header>
     <div class="content">
         <!-- Navigation -->
         <nav th:replace="fragments/commons::navigation"></nav>
         <!-- Main -->
         <main class="pets-view">
-            <div class="title">
-                <h1 class="title__heading">
-                    Login
-                </h1>
-            </div>
+            <h1 class="title title__heading">Login</h1>
+            <!-- Error Message -->
+            <th:block th:replace="fragments/commons::error-message"></th:block>
             <form class="pet-form"
                   th:action="@{/users/login}"
                   th:method="POST"

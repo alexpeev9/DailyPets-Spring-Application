@@ -17,13 +17,10 @@
         <!-- Navigation -->
         <nav th:replace="fragments/commons::navigation"></nav>
         <!-- Main -->
-        <main class="pets-view" th:object="${pet}">
-            <div class="title">
-                <h1 class="title__heading">
-                    Update
-                    <th:block th:text="*{name}"></th:block>
-                </h1>
-            </div>
+        <main class="pets-view" th:object="${petBM}">
+            <h1 class="title title__heading">Update Pet</h1>
+            <!-- Error Message -->
+            <th:block th:replace="fragments/commons::error-message"></th:block>
             <form class="pet-form"
                   th:action="@{/pets/update/{id}(id = *{id})}"
                   th:method="POST"
@@ -74,7 +71,7 @@
 
                     <button class="pet-form__submit" type="submit">Update Pet</button>
                     <a th:href="@{/pets/delete/{id}(id = *{id})}" class="pet-form__submit">
-                       Delete Pet
+                        Delete Pet
                     </a>
                 </div>
             </form>

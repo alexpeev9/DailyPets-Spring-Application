@@ -4,9 +4,10 @@
 
 <header class="header" th:fragment="header">
     <img src="/images/logo.png" alt="logo" class="logo">
-
-    <form action="#" class="search">
-        <input type="text" class="search__input" placeholder="Search pets">
+    <form class="search"  th:action="@{/}"
+          th:method="POST"
+          enctype="multipart/form-data">
+        <input name="name" type="text" id="name" class="search__input" placeholder="Search pets">
         <button class="search__button">
             <svg class="search__icon">
                 <use xlink:href="/images/sprite.svg#lnr-magnifier"></use>
@@ -14,6 +15,8 @@
         </button>
     </form>
 </header>
+
+<h2 th:fragment="error-message" class="title title__heading title__error"  th:if="${error}" th:text="${error}"></h2>
 
 <nav class="sidebar" th:fragment="navigation">
     <ul class="side-nav">
@@ -50,6 +53,14 @@
                         <use xlink:href="/images/sprite.svg#lnr-plus-circle"></use>
                     </svg>
                     <span>Add Pet</span>
+                </a>
+            </li>
+            <li class="side-nav__item">
+                <a th:href="@{/users/profile/{username}(username = *{@currentUser.username})}" class="side-nav__link">
+                    <svg class="side-nav__icon">
+                        <use xlink:href="/images/sprite.svg#lnr-rocket"></use>
+                    </svg>
+                    <span>My Pets</span>
                 </a>
             </li>
             <li class="side-nav__item">
