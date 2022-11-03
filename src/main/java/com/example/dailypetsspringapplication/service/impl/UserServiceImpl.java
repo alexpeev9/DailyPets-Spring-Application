@@ -64,13 +64,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logout() {
+        if (!this.isLogged()) throw new RuntimeException("User is not logged!");
         currentUser.setUsername(null);
         currentUser.setId(null);
-    }
-
-    @Override
-    public UserVM findById(Long id) {
-        return userRepository.findById(id).map(u -> modelMapper.map(u, UserVM.class)).orElse(null);
     }
 
     @Override
@@ -84,18 +80,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isNameExists(String username) {
-        return userRepository.findByUsername(username).isPresent();
-    }
-
-    @Override
     public boolean isLogged() {
         return currentUser.getId() != null;
     }
 
     @Override
     public User findCurrentUser() {
-        return userRepository.findById(currentUser.getId()).orElse(null);
+        if (!this.isLogged()) throw new RuntimeException("User is not logged!");
+        User user = userRepository.findById(currentUser.getId()).orElse(null);
+        if (user == null) throw new RuntimeException("User is not found!");
+        return user;
     }
 
     @Override
@@ -103,7 +97,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) throw new RuntimeException("User not found!");
         List<PetVM> pets = userRepository.findPetsOfUser(user).stream().map(p -> modelMapper.map(p, PetVM.class)).collect(Collectors.toList());
-        if (pets.stream().count() == 0) return null;
+        if (pets.size() == 0) return null;
         return pets;
     }
 }

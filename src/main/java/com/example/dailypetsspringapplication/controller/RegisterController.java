@@ -3,7 +3,6 @@ package com.example.dailypetsspringapplication.controller;
 import com.example.dailypetsspringapplication.model.binding.UserRegisterBM;
 import com.example.dailypetsspringapplication.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,8 +27,15 @@ public class RegisterController {
     }
 
     @GetMapping("/register")
-    public String registerGET(Model model) {
-        return "register";
+    public String registerGET(RedirectAttributes redirectAttributes) {
+        try {
+            if (userService.isLogged()) throw new RuntimeException("User is already logged!");
+            return "register";
+        } catch (RuntimeException error) {
+            redirectAttributes
+                    .addFlashAttribute("error", error.getMessage());
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/register")

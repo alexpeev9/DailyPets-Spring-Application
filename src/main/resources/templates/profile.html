@@ -32,7 +32,7 @@
                         <div class="description">
                             <h3 th:text="*{name}"></h3>
                             <p th:text="*{description}" class="paragraph"></p>
-                            <th:block th:if="${@currentUser.username != username}">
+                            <th:block th:if="${@currentUser != null}">
                                 <a th:href="@{/pets/update/{id}(id = *{id})}"
                                    th:if="${@currentUser.username == username}" class="edit-btn">Update</a>
                             </th:block>

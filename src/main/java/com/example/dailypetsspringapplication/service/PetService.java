@@ -10,7 +10,7 @@ public interface PetService {
     List<PetVM> findAllPetsView();
     List<PetVM> findSearchedPetsView(String name);
     void addPet(PetBM petBM, User user);
-    PetBM findPet(Long id);
+    PetBM findPet(Long id, User user);
     void updatePet(PetBM petBM, User user);
     void deletePet(Long id, User user);
 }
