@@ -52,9 +52,11 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void updatePet(PetBM petBM, User user) {
-        validatePetName(petBM.getName());
         Pet pet = petRepository.findById(petBM.getId()).orElse(null);
         validatePet(pet, user);
+        if(!pet.getName().equals(petBM.getName())){
+            validatePetName(petBM.getName());
+        }
         pet.setName(petBM.getName());
         pet.setDescription(petBM.getDescription());
         pet.setPicture(petBM.getPicture());
