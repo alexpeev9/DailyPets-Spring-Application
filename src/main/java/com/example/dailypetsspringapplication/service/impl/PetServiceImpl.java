@@ -30,11 +30,9 @@ public class PetServiceImpl implements PetService {
     public List<PetVM> findSearchedPetsView(String name) {
         if (name.isEmpty()) throw new RuntimeException("Field cannot be empty!");
         List<PetVM> pets = petRepository.searchByNameStartingWith(name).orElse(null).stream().map(p -> modelMapper.map(p, PetVM.class)).collect(Collectors.toList());
-        if (pets.stream().count() == 0) throw new RuntimeException("There are no pets!");
+        if (pets.size() == 0) throw new RuntimeException("There are no pets!");
         return pets;
     }
-
-    ;
 
     @Override
     public void addPet(PetBM petBM, User user) {
@@ -49,8 +47,7 @@ public class PetServiceImpl implements PetService {
     public PetBM findPet(Long id, User user) {
         Pet pet = petRepository.findById(id).orElse(null);
         validatePet(pet, user);
-        PetBM petBM = modelMapper.map(pet, PetBM.class);
-        return petBM;
+        return modelMapper.map(pet, PetBM.class);
     }
 
     @Override
@@ -72,10 +69,10 @@ public class PetServiceImpl implements PetService {
         petRepository.deleteById(pet.getId());
     }
 
-    private  void validatePet(Pet pet, User user) {
+    private void validatePet(Pet pet, User user) {
         if (pet == null) throw new RuntimeException("Pet not found!");
         if (user == null) throw new RuntimeException("User is not logged!");
-        if (pet.getUser().getId() != user.getId()) throw new RuntimeException("User must be the creator!");
+        if (!pet.getUser().getId().equals(user.getId())) throw new RuntimeException("User must be the creator!");
     }
 
     private void validatePetName(String name) {

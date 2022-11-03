@@ -72,7 +72,7 @@ public class PetController {
     }
 
     @PostMapping("/update/{id}")
-    public String updatePOST(@Valid PetBM petBM, BindingResult bindingResult, Model model) throws IOException {
+    public String updatePOST(@Valid PetBM petBM, BindingResult bindingResult, Model model) {
         try {
             if (bindingResult.hasErrors()) {
                 model.addAttribute("petBM", petBM);

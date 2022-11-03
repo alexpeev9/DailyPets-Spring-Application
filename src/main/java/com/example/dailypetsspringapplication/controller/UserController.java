@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/profile/{username}")
-    private String profile(@PathVariable String username, Model model) {
+    public String profile(@PathVariable String username, Model model) {
         try {
             model.addAttribute("user", userService.findByUsername(username));
             model.addAttribute("pets", userService.findPetsOfUser(username));

@@ -70,11 +70,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVM findById(Long id) {
-        return userRepository.findById(id).map(u -> modelMapper.map(u, UserVM.class)).orElse(null);
-    }
-
-    @Override
     public UserVM findByEmail(String email) {
         return userRepository.findByEmail(email).map(u -> modelMapper.map(u, UserVM.class)).orElse(null);
     }
@@ -82,11 +77,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVM findByUsername(String username) {
         return userRepository.findByUsername(username).map(u -> modelMapper.map(u, UserVM.class)).orElse(null);
-    }
-
-    @Override
-    public boolean isNameExists(String username) {
-        return userRepository.findByUsername(username).isPresent();
     }
 
     @Override
@@ -107,7 +97,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) throw new RuntimeException("User not found!");
         List<PetVM> pets = userRepository.findPetsOfUser(user).stream().map(p -> modelMapper.map(p, PetVM.class)).collect(Collectors.toList());
-        if (pets.stream().count() == 0) return null;
+        if (pets.size() == 0) return null;
         return pets;
     }
 }
