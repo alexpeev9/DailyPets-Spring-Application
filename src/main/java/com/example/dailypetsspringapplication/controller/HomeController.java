@@ -20,10 +20,16 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        if(!model.containsAttribute("pets")){
-            model.addAttribute("pets", petService.findAllPetsView());
+        try {
+            if (!model.containsAttribute("pets")) {
+                model.addAttribute("pets", petService.findAllPetsView());
+            }
+            return "index";
+        } catch (RuntimeException error) {
+            model.addAttribute("error", error.getMessage());
+            model.addAttribute("pets", null);
+            return "index";
         }
-        return "index";
     }
 
     @PostMapping("/")
