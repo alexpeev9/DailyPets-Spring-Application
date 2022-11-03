@@ -29,19 +29,25 @@ public class PetController {
     }
 
     @GetMapping("/add")
-    public String addGET() {
-        return "add-pet";
+    public String addGET(RedirectAttributes redirectAttributes) {
+        try {
+            if (!userService.isLogged()) throw new RuntimeException("User is not logged!");
+            return "add-pet";
+        } catch (RuntimeException error) {
+            redirectAttributes
+                    .addFlashAttribute("error", error.getMessage());
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/add")
-    public String addPOST(@Valid PetBM petBM, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
+    public String addPOST(@Valid PetBM petBM, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         try {
             if (bindingResult.hasErrors()) {
                 redirectAttributes.addFlashAttribute("petBM", petBM);
                 redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.petBM", bindingResult);
                 return "redirect:add";
             }
-
             petService.addPet(petBM, userService.findCurrentUser());
             return "redirect:/";
         } catch (RuntimeException error) {
@@ -54,9 +60,15 @@ public class PetController {
     }
 
     @GetMapping("/update/{id}")
-    public String updateGET(@PathVariable Long id, Model model) {
-        model.addAttribute("petBM", petService.findPet(id));
-        return "update-pet";
+    public String updateGET(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            model.addAttribute("petBM", petService.findPet(id, userService.findCurrentUser()));
+            return "update-pet";
+        } catch (RuntimeException error) {
+            redirectAttributes
+                    .addFlashAttribute("error", error.getMessage());
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/update/{id}")
@@ -78,10 +90,10 @@ public class PetController {
 
     @GetMapping("/delete/{id}")
     public String deleteGET(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        try{
+        try {
             petService.deletePet(id, userService.findCurrentUser());
             return "redirect:/";
-        }catch(RuntimeException error){
+        } catch (RuntimeException error) {
             redirectAttributes.addFlashAttribute("error", error.getMessage());
             return "redirect:/";
         }

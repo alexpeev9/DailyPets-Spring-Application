@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logout() {
+        if (!this.isLogged()) throw new RuntimeException("User is not logged!");
         currentUser.setUsername(null);
         currentUser.setId(null);
     }
@@ -95,7 +96,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findCurrentUser() {
-        return userRepository.findById(currentUser.getId()).orElse(null);
+        if (!this.isLogged()) throw new RuntimeException("User is not logged!");
+        User user = userRepository.findById(currentUser.getId()).orElse(null);
+        if (user == null) throw new RuntimeException("User is not found!");
+        return user;
     }
 
     @Override

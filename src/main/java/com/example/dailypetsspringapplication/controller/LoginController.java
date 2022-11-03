@@ -28,8 +28,15 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String loginGET(Model model) {
-        return "login";
+    public String loginGET(Model model, RedirectAttributes redirectAttributes) {
+        try {
+            if (userService.isLogged()) throw new RuntimeException("User is already logged!");
+            return "login";
+        } catch (RuntimeException error) {
+            redirectAttributes
+                    .addFlashAttribute("error", error.getMessage());
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/login")

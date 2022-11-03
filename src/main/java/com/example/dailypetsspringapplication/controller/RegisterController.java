@@ -28,8 +28,15 @@ public class RegisterController {
     }
 
     @GetMapping("/register")
-    public String registerGET(Model model) {
-        return "register";
+    public String registerGET(Model model, RedirectAttributes redirectAttributes) {
+        try {
+            if (userService.isLogged()) throw new RuntimeException("User is already logged!");
+            return "register";
+        } catch (RuntimeException error) {
+            redirectAttributes
+                    .addFlashAttribute("error", error.getMessage());
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/register")
